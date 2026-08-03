@@ -2,9 +2,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
 
+const isProd = process.env.NODE_ENV === "production";
+
 const cookieContent = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
+  secure: false,
   sameSite: "lax",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
@@ -143,7 +145,7 @@ const logoutUser = async (req, res) => {
 
   if (token) {
     const payload = jwt.decode(token);
-    await User.findByIdAndUpdate(payload._id, { refreshToken: null });
+    await User.findByIdAndUpdate(payload.id, { refreshToken: null });
   }
 
   res.clearCookie("refreshToken");
