@@ -60,4 +60,6 @@ app.use("/api/shop/account", shopAccountRouter);
 
 app.use("/api/common/feature", commonFeatureRouter);
 
-app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
+app.listen(PORT, "0.0.0.0", () =>
+  console.log(`Server is now running on port ${PORT}`),
+);
