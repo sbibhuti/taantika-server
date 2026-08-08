@@ -27,7 +27,7 @@ const OrderSchema = new mongoose.Schema({
   orderDate: Date,
   orderUpdateDate: Date,
   paymentId: String,
-  payerId: String,
+  razorpayOrderId: String,
 });
 
 module.exports = mongoose.model("Order", OrderSchema);

@@ -20,6 +20,8 @@ const UserSchema = new mongoose.Schema({
     default: "user",
   },
   refreshToken: String,
+  mobile: String,
+  gender: String,
 });
 
 const User = mongoose.model("User", UserSchema);

@@ -6,8 +6,8 @@ const isProd = process.env.NODE_ENV === "production";
 
 const cookieContent = {
   httpOnly: true,
-  secure: true,
-  sameSite: "none",
+  secure: isProd,
+  sameSite: isProd ? "none" : "lax",
   path: "/",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
@@ -169,4 +169,10 @@ const me = async (req, res) => {
   });
 };
 
-module.exports = { registerUser, loginUser, refreshUser, logoutUser, me };
+module.exports = {
+  registerUser,
+  loginUser,
+  refreshUser,
+  logoutUser,
+  me,
+};
