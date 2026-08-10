@@ -1,4 +1,5 @@
 const Wishlist = require("../../models/Wishlist");
+const Product = require("../../models/Product");
 
 const getWishlist = async (req, res) => {
   try {
@@ -47,6 +48,19 @@ const wishlistAdd = async (req, res) => {
       { new: true, upsert: true },
     );
 
+    const product = await Product.findByIdAndUpdate(
+      productId,
+      { $set: { wishlist: true } },
+      { new: true },
+    );
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
     res
       .status(200)
       .json({ success: true, message: "Added to wishlist", wishlist });
@@ -65,10 +79,17 @@ const wishlistDelete = async (req, res) => {
       { new: true },
     );
 
-    if (!wishlist) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Wishlist not found" });
+    const product = await Product.findByIdAndUpdate(
+      productId,
+      { $set: { wishlist: false } },
+      { new: true },
+    );
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
     }
 
     res

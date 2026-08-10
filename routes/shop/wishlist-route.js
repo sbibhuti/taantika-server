@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get("/get", getWishlist);
 router.post("/add", wishlistAdd);
-router.patch("/delete", wishlistDelete);
+router.patch("/remove", wishlistDelete);
 router.delete("/clear/:userId", clearWishlist);
 
 module.exports = router;

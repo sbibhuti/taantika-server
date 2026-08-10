@@ -13,6 +13,7 @@ const ProductSchema = new mongoose.Schema(
     discount: Number,
     totalStock: Number,
     averageReview: Number,
+    wishlist: Boolean,
     reviewCount: {
       type: Number,
       default: 0,
